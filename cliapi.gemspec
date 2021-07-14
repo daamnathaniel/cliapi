@@ -2,14 +2,15 @@
 Gem::Specification.new do |s|
     s.name = "cliapi"
     s.version = "0.0.1"
-    s.summary = "summary"
-    s.authors = ['authors']
+    s.summary = "a cli for an api"
+    s.authors = ['nathaniel']
 
     s.license = 'MIT'
-    s.email = 'degcat@126.com'
-    s.homepage = 'https://rubygems.org/gems/a'
+    s.email = 'daamnathanielatgeemaildotcom'
+    s.homepage = 'https://github.com/daamnathaniel/cliapi'
 
     s.files =  Dir["lib/*.rb"]
     s.executables << "cliapi" 
 end
+
 
