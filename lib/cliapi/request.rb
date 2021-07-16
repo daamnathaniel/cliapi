@@ -1,3 +1,4 @@
 class Request
-	attr_accessor :address, :parameters
+	attr_accessor :endpoint, :params
 end
+
