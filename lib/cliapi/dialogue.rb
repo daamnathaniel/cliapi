@@ -1,6 +1,15 @@
+module Dialogue
 
-ASK = -> question { puts question ; gets.strip }
-SAY = -> statement { puts statement }
+  ASK = -> question { puts question ; gets.strip }
+  SAY = -> statement { puts statement }
+
+#instructions = <<-EOT
+#  Instructions:
+#  1. Choose from either [words] or [sug].
+#  2. If you've chosen [words], choose a [constraint].
+#  3. Enter a base word to search from.
+#EOT
+
 
   class Question
     class << self
@@ -37,9 +46,13 @@ SAY = -> statement { puts statement }
       end
 
       def instructions
- puts %Q(
-Instructions:\n1. Choose from either [words] or [sug].\n2. If you've chosen [words], choose a [constraint].\n3. Enter a base word to search from.
+ 		%Q(
+Instructions:
+        1. Choose from either [words] or [sug].
+        2. If you've chosen [words], choose a [constraint].
+        3. Enter a base word to search from.
         )
-      end
+      end      
     end
   end
+end
