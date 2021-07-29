@@ -11,10 +11,11 @@ class CLI
   end
 
   def greeting
-	Dialogue::SAY.(Dialogue::Statement.greeting)
-	Dialogue::SAY.(Dialogue::Statement.instructions)
-	Dialogue::SAY.(Dialogue::Statement.words)
-	Dialogue::SAY.(Dialogue::Statement.suggest)
+
+	SAY.(Statement.greeting)
+	SAY.(Statement.instructions)
+	SAY.(Statement.words)
+	SAY.(Statement.suggest)
   end
 
   def menu
