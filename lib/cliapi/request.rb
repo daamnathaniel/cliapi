@@ -1,67 +1,31 @@
-class Request
-  attr_accessor :api, :endpoint, :params, :response
-
-  def initialize
-    @api = API.new
-    self
-  end
-
-  def words
-    @endpoint = "words"
-    self
-  end
-
-  def suggestions
-    @endpoint = "sug"
-    self
-  end
-
-  def method_missing(m, *args, &block)
-    constraints = Word::Constraints[m.to_sym] if @endpoint == "words"
-    constraints = "s" if @endpoint == "sug"
-    @params = { constraints => args, :md => 'dpsrf' }
-    self
-  end
-
-  def fetch
-    response  = @api.send(@endpoint, @params)
-    @response = JSON.parse(response.to_json, symbolize_names: true)
-    @results = Results.new(@response)
-  end
-
-  def results
-    @results
-  end
-end
-
+class Request < Struct.new(:api, :endpoint, :params); end
 
 class RequestBuilder
-  attr_accessor :request, :constraints, :variable, :response, :results
+  attr_accessor :request, :constraints, :variable
 
   def initialize
     @request = Request.new
-    @api = @request.api
+    @request.api = API.new
   end
 
-  def endpoint
+  def request_endpoint
     @request.endpoint = ASK.(Question.endpoint)
   end
 
-  def words
-    @constraints = ASK.(Question.constraints)
-  end
-
-  def sug
-    @constraints = "s"
-  end
-
-  def params
+  def request_params
+    if @request.endpoint == "words"
+      @constraints = ASK.(Question.constraints)
+    else
+      @constraints = "s"
+    end
     @variable = ASK.(Question.variable)
     @request.params = Word.constraints(@constraints, @variable)
   end
 
-  def finish
-    @request.fetch
+  def request_send
+    response  = @request.api.send(@request.endpoint, @request.params)
+    @response = JSON.parse(response.to_json, symbolize_names: true)
+    Results.new(@response)
   end
 
   def request
