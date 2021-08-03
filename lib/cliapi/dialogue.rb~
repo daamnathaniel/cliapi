@@ -17,16 +17,6 @@ class Question
       "which word? "
     end
 
-    def next_options
-      %Q(
-choose:
-- [more] info on a particular word
-- [search] for another word
-- [quit]
-      )
-    end
-
-
   end
 end
 
@@ -59,6 +49,15 @@ Instructions:
 2. If you select [words], also select a [constraint].
 3. Enter a base word to search from.
       }
+    end
+
+    def next_options
+      %Q(
+choose:
+- [more] info on a particular word
+- [search] for another word
+- [quit]
+      )
     end
 
     def initial_options

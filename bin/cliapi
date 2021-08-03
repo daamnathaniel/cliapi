@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby                
 
-require_relative '../config/environment'
+require_relative '../lib/cliapi'
 require_relative '../lib/cliapi/cli'
 
-CLI.new.call
+CLIAPI::CLI.new.call
 #Session.new.call

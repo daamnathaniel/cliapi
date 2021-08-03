@@ -1,6 +1,50 @@
 
 
-module Word
+Word = Struct.new(:word, :score, :numSyllables, :tags, :defs, :defHeadword)
+
+module Words
+  extend self
+
+  @@all = {}
+
+  def add(word, word_info)
+    @@all.store(word, word_info)
+  end
+
+  def find(word)
+    @@all[word.to_sym]
+  end
+
+  def all
+    @@all
+  end
+end
+
+
+
+
+module View
+  extend self
+
+  def word(word)
+    @word = Words.all[word]
+    puts %Q(
+-#{@word.word} #{@word.defHeadword}
+#{@word.tags}, #{@word.score}, #{@word.numSyllables}
+    )
+    puts @word.defs
+  end
+
+  def words(words)
+    words.each_with_index do |word, index|
+      puts "#{index+1}. #{word}"
+    end
+  end
+end
+
+
+
+module Parameter
   extend self
   Constraints = {
     similar_meanings: :ml,
@@ -29,6 +73,6 @@ module Word
 
   def constraints(constraints, variable)
     @constraints = constraints.to_s.to_sym
-    { Word::Constraints[@constraints] => variable, md: 'dpsrf' }
+    { Parameter::Constraints[@constraints] => variable, md: 'dpsrf' }
   end
 end

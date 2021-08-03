@@ -20,7 +20,8 @@ class CLIAPI::CLI
   end
 
   def initial_menu
-    SAY.(Statement.initial_options)
+    answer = ASK.(Statement.initial_options)
+    quit if answer == "quit"
   end
 
 
@@ -37,9 +38,12 @@ class CLIAPI::CLI
   end
 
   def next_menu
-    SAY.(Statement.next_options)
-
-
+    answer = ASK.(Statement.next_options)
+    case answer
+    when 1 then ASK.(Question.word)
+    when 2 then options
+    when 3 then quit
+    end
   end
 
 

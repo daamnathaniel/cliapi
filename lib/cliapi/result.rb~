@@ -1,7 +1,7 @@
 
 
 class Result
-  attr_accessor :word, :score, :numSyllables, :tags, :defs, :defHeadword, :results
+  attr_accessor :word, :score, :numSyllables, :tags, :defs, :defHeadword,.:results
 
   def initialize(response)
     @results = []
